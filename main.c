@@ -8,6 +8,21 @@
   ******************************************************************************
 */
 
+/*
+	Goals of this lab:
+ 		- control onboard LEB using onboard button
+   		- LED must start off
+     		- when pressed, LED oscilates on/off for 500 ms each. when pressed again, the button will go on/off for 1s each, and so on up to 3s on/off
+       		- at 3s, once the button is pressed then the LED must return back to 500ms on/off, and the cycle continues
+	 	- if LED is held down for more than 1 second, then the LED turns off 
+
+    	My solution:
+     		- uses systick to measure how long button is pressed for
+       		- uses var "button flag" to count how long the button has been held
+	 	- uses var "button if" to detect if button is pressed
+   		- uses var "button period" to control PWM for LED
+     		- uses interrupt to detect rising/falling edges
+*/
 
 #include <stdio.h>
 #include "stm32l4xx.h"
