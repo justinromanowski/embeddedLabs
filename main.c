@@ -17,7 +17,7 @@
 // PC.13 <--> Blue user button
 #define LED_PIN    5
 #define BUTTON_PIN 13
-volatile int buttonperiod; //Denote what the period length of the LED pulse is (in seconds)
+volatile int buttonperiod; //Denote period length of LED pulse (in seconds)
 volatile int buttonflag; //Denote if button has been held for 1s or longer
 volatile int buttonif; //holds the value of button if it is pressed down (0) or not pressed down (1)
 int mask = (1UL<<BUTTON_PIN); //bitwise and with button's IDR
@@ -27,12 +27,12 @@ void System_Clock_Init(void){
 	uint32_t HSITrim;
 
 	// To correctly read data from FLASH memory, the number of wait states (LATENCY)
-  // must be correctly programmed according to the frequency of the CPU clock
-  // (HCLK) and the supply voltage of the device.
+  	// must be correctly programmed according to the frequency of the CPU clock
+	// (HCLK) and the supply voltage of the device.
 	FLASH->ACR &= ~FLASH_ACR_LATENCY;
 	FLASH->ACR |=  FLASH_ACR_LATENCY_2WS;
 
-	// Enable the Internal High Speed oscillator (HSI
+	// Enable the Internal High Speed oscillator (HSI)
 	RCC->CR |= RCC_CR_HSION;
 	while((RCC->CR & RCC_CR_HSIRDY) == 0);
 	// Adjusts the Internal High Speed oscillator (HSI) calibration value
@@ -143,7 +143,7 @@ void configure_BUTTONPIN(){
 
 
 	NVIC_EnableIRQ(EXTI15_10_IRQn); 	//GPIO Pin 13, so use EXTI15-10
-    NVIC_SetPriority(EXTI15_10_IRQn, 1); //Set priority to highest
+    	NVIC_SetPriority(EXTI15_10_IRQn, 1); //Set priority to highest
 
 	RCC->APB2ENR |= RCC_APB2ENR_SYSCFGEN;	//connect to GPIO
 	SYSCFG->EXTICR[3] &= ~SYSCFG_EXTICR4_EXTI13;     // SYSCFG external interrupt configuration registers 70
